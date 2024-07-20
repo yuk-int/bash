@@ -4,3 +4,5 @@
 
 files:
 ipSearch.sh
+macro1.py
+macro1.ipynb
