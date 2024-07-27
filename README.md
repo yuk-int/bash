@@ -4,6 +4,8 @@
 - binary filtering
 
 files:
+(bash)
 - ipSearch.sh
-- macro1.py
-- macro1.ipynb
+(python)
+- macro1.py: os module to detect folder, file
+- macro1.ipynb: Ox format with filtering
