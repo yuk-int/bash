@@ -8,4 +8,5 @@ files:
 - ipSearch.sh
 (python)
 - macro1.py: os module to detect folder, file
-- macro1.ipynb: Ox format with filtering
+- macro2.py: Ox format with filtering
+- macro1.ipynb: coding test
