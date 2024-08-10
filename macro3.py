@@ -30,5 +30,6 @@ while True:
 if __name__ == '__main__':
     button, red = initialization()
     button.when_released = action
+    #button.when_released = twinkle
     red.on()
     signal.pause()
