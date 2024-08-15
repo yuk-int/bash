@@ -2,6 +2,7 @@ import signal
 import RPi.GPIO as GPIO
 from gpiozero import Button
 from gpiozero import LED
+from datetime import datetime
 from time import sleep
 
 def initialization():
@@ -16,8 +17,14 @@ def twinkle():
 
 def action():
     red.toggle()
-    print("button is pressed")
-
+    print("botton is toggled")
+    now = datetime.now()
+    now_str = now.strftime("%Y-%m-%d %H:%M:%S")
+    if red.is_lit:
+        print(f"light is ON_{now_str}")
+    else:
+        print(f"light is OFF_{now_str}")
+    
 '''
 while True:
     if button.is_pressed:
