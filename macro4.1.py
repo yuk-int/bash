@@ -8,6 +8,7 @@ from gpiozero import LED
 from datetime import datetime
 from time import sleep
 import paho.mqtt.publish as publish
+import redis
 
 def initialization():
     button = Button(pin=18)
