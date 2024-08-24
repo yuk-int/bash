@@ -11,7 +11,7 @@ load_dotenv()
 st.title("classroom")
 st.header("sensor:blue[cool] :sunglasses:")
 
-redis_conn = redis.Redis(host=os.environ('render_redis_interna'), port=6379)
+redis_conn = redis.Redis(host=os.environ['render_redis_interna'], port=6379)
 
 b_list = redis_conn.lrange('btn/func1',-10,-1)
 #byte list to str
@@ -27,3 +27,8 @@ st.dataframe(df,
                  "Status":st.column_config.CheckboxColumn(label="botton status", width="small"),
                  "Date":st.column_config.DatetimeColumn(label="time", width="small")
              })
+
+'''
+web: pip install --upgrade pip && pip install -r requirements.txt
+
+'''
