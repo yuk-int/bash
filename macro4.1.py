@@ -8,6 +8,10 @@ from gpiozero import LED
 from datetime import datetime
 from time import sleep
 import paho.mqtt.publish as publish
+import os
+from dotenv import load_dotenv
+
+load_dotenv()
 
 def initialization():
     button = Button(pin=18)
@@ -27,13 +31,24 @@ def action():
     
     if red.is_lit:
         print(f"light is ON_{now_str}")
-        message=f"light is ON_{now_str}"
-        publish.single(topic="btn/func1", payload=message, hostname="localhost", qos=2)
+        #message = f"light is ON_{now_str}"
+        message = f'''{{
+            "status":"true",
+            "date":"{now_str}",
+            "topic":"btn/func1"
+        }}'''
+        #print (message)
+        publish.single(topic="btn/func1", payload=message, hostname="localhost", qos=2, auth={'username':os.environ['mqtt_username'],'password':os.environ['mqtt_password']})
         #print ("mqtt-publish1")
     else:
         print(f"light is OFF_{now_str}")
-        message=f"light is OFF_{now_str}"
-        publish.single(topic="btn/func2", payload=message, hostname="localhost", qos=2)
+        #message = f"light is OFF_{now_str}"
+        message = f'''{{
+            "status":"false",
+            "date":"{now_str}",
+            "topic":"btn/func1"
+        }}'''
+        publish.single(topic="btn/func2", payload=message, hostname="localhost", qos=2, auth={'username':os.environ['mqtt_username'],'password':os.environ['mqtt_password']})
         #print ("mqtt-publish2")
 
 
