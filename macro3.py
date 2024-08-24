@@ -6,12 +6,21 @@
 import paho.mqtt.client as mqtt
 #from paho.mqtt import client as client
 import redis
+from dotenv import load_dotenv
+import os
 
-redis_conn = redis.Redis(host='localhost', port=6379, password='redispass')
+load_dotenv()
+
+#redis_conn = redis.Redis(host='localhost', port=6379, password='redispass')
+redis_conn = redis.Redis(host='localhost', port=6379)
+render_redis_conn=redis.Redis.from_url(os.environ['render_redis'])
+
 
 def on_message(mosq, obj, msg):
     topic = msg.topic
     message = msg.payload.decode('utf-8')
+    redis_conn.rpush(topic,message)
+    render_redis_conn.rpush(topic,message)
     print (f"topic={topic}, message={message}")
 
 if __name__ == '__main__':

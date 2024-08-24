@@ -8,7 +8,6 @@ from gpiozero import LED
 from datetime import datetime
 from time import sleep
 import paho.mqtt.publish as publish
-import redis
 
 def initialization():
     button = Button(pin=18)
@@ -28,11 +27,13 @@ def action():
     
     if red.is_lit:
         print(f"light is ON_{now_str}")
-        publish.single(topic="btn/func1", payload="test1", hostname="localhost", qos=2)
+        message=f"light is ON_{now_str}"
+        publish.single(topic="btn/func1", payload=message, hostname="localhost", qos=2)
         #print ("mqtt-publish1")
     else:
         print(f"light is OFF_{now_str}")
-        publish.single(topic="btn/v", payload="test2", hostname="localhost", qos=2)
+        message=f"light is OFF_{now_str}"
+        publish.single(topic="btn/func2", payload=message, hostname="localhost", qos=2)
         #print ("mqtt-publish2")
 
 
